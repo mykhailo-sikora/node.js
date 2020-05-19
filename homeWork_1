@@ -1,0 +1,24 @@
+const fs = require("fs");
+const path = require("path");
+
+const dir18 = "oct-19/1800";
+const dir20 = "oct-19/2000";
+
+function movingFiles(dirA, dirB) {
+  fs.readdir(dirA, (err, files) => {
+    for (let file of files) {
+      fs.rename(path.join(dirA, file), path.join(dirB, file), (err) => {
+        err ? console.log(err) : console.log("successful");
+      });
+    }
+  });
+
+  fs.readdir(dirB, (err, files) => {
+    for (let file of files) {
+      fs.rename(path.join(dirB, file), path.join(dirA, file), (err) => {
+        err ? console.log(err) : console.log("successful");
+      });
+    }
+  });
+}
+movingFiles(dir18, dir20);
